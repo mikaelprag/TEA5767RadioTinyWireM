@@ -1,13 +1,14 @@
 // TEA5767 Example
+// Attiny85: Connect SDA to D0 and SDC to D2
 
-#include <Wire.h>
-#include <TEA5767Radio.h>
+#include <TinyWireM.h>
+#include <TEA5767RadioTinyWireM.h>
 
-TEA5767Radio radio = TEA5767Radio();
+TEA5767RadioTinyWireM radio = TEA5767RadioTinyWireM();
 
 void setup()
-{ 
-  Wire.begin();
+{
+  TinyWireM.begin();
   radio.setFrequency(93.0); // pick your own frequency
 }
 

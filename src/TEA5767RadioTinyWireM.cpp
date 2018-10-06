@@ -19,34 +19,34 @@ The latest version of this library can always be found at
 http://arduiniana.org.
 
 
-Simon Monk 2013
+Original by Simon Monk 2013, modified for TinyWireM by Mikael Prag 2018
 */
 
 #include <Arduino.h>
-#include <TEA5767Radio.h>
+#include <TEA5767RadioTinyWireM.h>
 
-TEA5767Radio::TEA5767Radio(int address)
+TEA5767RadioTinyWireM::TEA5767RadioTinyWireM(int address)
 {
   _address = address;
 }
 
-TEA5767Radio::TEA5767Radio()
+TEA5767RadioTinyWireM::TEA5767RadioTinyWireM()
 {
   _address = 0x60;
 }
 
 
-void TEA5767Radio::setFrequency(float frequency)
+void TEA5767RadioTinyWireM::setFrequency(float frequency)
 {
-  	unsigned int frequencyB = 4 * (frequency * 1000000 + 225000) / 32768; 
+  	unsigned int frequencyB = 4 * (frequency * 1000000 + 225000) / 32768;
 	byte frequencyH = frequencyB >> 8;
 	byte frequencyL = frequencyB & 0XFF;
-	Wire.beginTransmission(_address); 
-	Wire.write(frequencyH);
-	Wire.write(frequencyL);
-	Wire.write(0xB0);
-	Wire.write(0x10);
-	Wire.write(0x00);
-	Wire.endTransmission();
-	delay(100);  
+  TinyWireM.beginTransmission(_address);
+  TinyWireM.send(frequencyH);
+  TinyWireM.send(frequencyL);
+  TinyWireM.send(0xB0);
+  TinyWireM.send(0x10);
+  TinyWireM.send(0x00);
+  TinyWireM.endTransmission();
+	delay(100);
 }
